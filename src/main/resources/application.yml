@@ -1,0 +1,53 @@
+server:
+  port: 8088
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/web-auth-system?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 1234
+  data:
+    redis:
+      host: 192.168.100.128
+      port: 6379
+      password: 123321
+      database: 1
+      # 连接超时时间（毫秒）
+      timeout: 10s
+      client-type: lettuce
+      lettuce:
+        pool:
+          # 连接池最大连接数（使用负值表示没有限制） 默认 8
+          max-active: 1000
+          # 连接池中的最大空闲连接 默认 8
+          max-idle: 300
+          # 连接池中的最小空闲连接 默认 0
+          min-idle: 3
+          # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+          max-wait: 1s
+
+
+
+
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.was.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      was:
+        mapper: debug
+        service: info
+        controller: info
+
