@@ -55,29 +55,6 @@ public class AuthController {
     public Result<LoginVO> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response){
         log.info("用户登录: {}", loginDTO);
         return authService.login(loginDTO, response);
-
-//        //登录成功后，生成jwt令牌
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put("userId", user.getId());
-//        String token = JwtUtil.createJWT(
-//                jwtProperties.getUserSecretKey(),
-//                jwtProperties.getUserTtl(),
-//                claims);
-//
-//        //将jwt令牌写入cookie
-//        ResponseCookie cookie = ResponseCookie.from(jwtProperties.getUserTokenName(), token)
-//                .httpOnly(true)
-//                .secure(true)
-//                .path("/")
-//                .maxAge(Duration.ofMillis(jwtProperties.getUserTtl()))
-//                .sameSite("Strict")
-//                .build();
-//        response.setHeader("Set-Cookie", cookie.toString());
-        //返回登录结果
-//        return Result.success(AdminLoginVO.builder()
-//                .id(user.getId())
-//                .userName(user.getUserName())
-//                .build());
     }
 
 

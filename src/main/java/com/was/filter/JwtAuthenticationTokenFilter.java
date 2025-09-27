@@ -38,8 +38,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        // 获取token
-//        String token = request.getHeader(jwtProperties.getUserTokenName());
         // 从Cookie中获取token
         String token = getTokenFromCookie(request);
 
@@ -65,7 +63,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-        /*// 如果没有token，直接放行
+
+
+        /*
+        // 获取token
+        String token = request.getHeader(jwtProperties.getUserTokenName());
+        // 如果没有token，直接放行
         if (token == null) {
             filterChain.doFilter(request, response);
             return;

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+// 用户详情服务实现类
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
         if (authMapper.getUser(user.getUserName()) != null) {
             throw new RuntimeException("用户已存在");
         }
-        String encode = passwordEncoder.encode(user.getPassword());
+        String encode = passwordEncoder.encode(user.getPassword());//密码进行加密
         user.setPassword(encode);
         authMapper.insertUser(user);
     }
