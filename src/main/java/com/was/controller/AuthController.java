@@ -1,5 +1,6 @@
 package com.was.controller;
 
+import com.was.annotation.RateLimit;
 import com.was.pojo.JwtProperties;
 import com.was.pojo.Result;
 import com.was.pojo.dto.LoginDTO;
@@ -35,6 +36,7 @@ public class AuthController {
      * @return 注册结果
      */
     @PostMapping("/register")
+    @RateLimit
     public Result<Void> register(@Valid @RequestBody RegisterDTO registerDTO, BindingResult bindingResult) {
         log.info("用户注册: {}", registerDTO);
         // 检查是否有验证错误

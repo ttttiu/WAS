@@ -1,6 +1,5 @@
 package com.was.config;
 
-import com.was.Interceptor.JwtTokenAdminInterceptor;
 import com.was.filter.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -66,8 +65,6 @@ public class SecurityConfig{
                 );
         // 将JWT过滤器添加到UsernamePasswordAuthenticationFilter之前
         http.addFilterBefore(jwtTokenAdminInterceptor, UsernamePasswordAuthenticationFilter.class);
-
-
         return http.build();
     }
 }

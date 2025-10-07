@@ -102,6 +102,18 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.83</version>
         </dependency>
+
+        <!--Google Guava 依赖，用于实现限流功能-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.0.1-android</version>
+        </dependency>
+        <!--AOP依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
