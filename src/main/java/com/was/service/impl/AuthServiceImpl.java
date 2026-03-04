@@ -1,11 +1,13 @@
 package com.was.service.impl;
 
 import com.was.mapper.AuthMapper;
+import com.was.mapper.RoleMapper;
 import com.was.pojo.JwtProperties;
 import com.was.pojo.Result;
 import com.was.pojo.dto.LoginDTO;
 import com.was.pojo.dto.RegisterDTO;
 import com.was.pojo.entity.LoginUser;
+import com.was.pojo.entity.Role;
 import com.was.pojo.entity.User;
 import com.was.pojo.vo.LoginVO;
 import com.was.service.AuthService;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -39,6 +42,8 @@ public class AuthServiceImpl implements AuthService {
     private RedisTemplate<String, Object> redisTemplate;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleMapper roleMapper;
 
     /**
      *  注册
@@ -93,10 +98,18 @@ public class AuthServiceImpl implements AuthService {
         response.setHeader("Set-Cookie", cookie.toString());//将cookie写入响应头
         //把完整的用户信息存入redis，userid作为key
         redisTemplate.opsForValue().set("login:"+userId, loginUser);
+        
+        // 查询用户角色
+        List<Role> roles = roleMapper.selectRolesByUserId(user.getId());
+        
         return Result.success(LoginVO.builder()
                 .id(user.getId())
                 .userName(user.getUserName())
+                .email(user.getEmail())
+                .nickname(user.getNickname())
+                .avatar(user.getAvatar())
                 .token(token)
+                .roles(roles)
                 .build());
     }
 
